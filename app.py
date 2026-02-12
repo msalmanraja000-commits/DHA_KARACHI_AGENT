@@ -38,8 +38,10 @@ if query:
 # --- THE SECURITY SHIELD FOOTER ---
 st.divider()
 st.markdown("""
-    <div style='text-align: center; color: #ff4b4b; font-size: 11px; font-weight: bold;'>
-        PROPERTY OF PROPTECSOLUTIONS. ALL RIGHTS RESERVED. <br>
-        <span style='color: gray;'>Access granted for evaluation purposes only. Unauthorized replication of this source code or AI architecture will lead to legal action under Pakistan Intellectual Property Laws.</span>
+    <div style='text-align: center; color: #c5a059; font-size: 11px; font-weight: bold;'>
+        PROPRIETARY ASSET OF PROPTECSOLUTIONS <br>
+        <span style='color: gray;'>© 2026 Salman Raja | Founder & CEO. <br>
+        CONFIDENTIAL PROTOTYPE: UNAUTHORIZED REPLICATION OR DISTRIBUTION IS STRICTLY PROHIBITED.</span>
     </div>
     """, unsafe_allow_html=True)
+
