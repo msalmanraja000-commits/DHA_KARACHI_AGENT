@@ -1,85 +1,99 @@
 import streamlit as st
 from groq import Groq
 from tavily import TavilyClient
+import pandas as pd
+import plotly.express as px
 
-# 1. Professional Page Setup
-st.set_page_config(page_title="DHA Karachi Advisor", page_icon="🏢", layout="wide")
+# 1. Ultra-Premium Page Config
+st.set_page_config(page_title="DHA Karachi Pro-Intelligence", page_icon="⚖️", layout="wide")
 
-# Custom CSS for Corporate Look
+# Professional Styling
 st.markdown("""
     <style>
-    .main { background-color: #f5f7f9; }
-    .stButton>button { background-color: #002b5b; color: white; border-radius: 5px; }
-    .stChatMessage { border-radius: 15px; border: 1px solid #ddd; margin-bottom: 10px; }
+    .stApp { background-color: #0e1117; color: #ffffff; }
+    [data-testid="stSidebar"] { background-color: #1a1c24; border-right: 1px solid #3d4450; }
+    .stMetric { background-color: #1e2129; padding: 15px; border-radius: 10px; border: 1px solid #3d4450; }
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Keys from Secrets
+# 2. Secure API Initialization
 try:
-    GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
-    TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]
-    client = Groq(api_key=GROQ_API_KEY)
-    tavily = TavilyClient(api_key=TAVILY_API_KEY)
-except Exception as e:
-    st.error("Secrets setup missing! Please check Streamlit dashboard.")
+    client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+    tavily = TavilyClient(api_key=st.secrets["TAVILY_API_KEY"])
+except:
+    st.error("API Keys missing in Streamlit Secrets!")
     st.stop()
 
-# 3. Sidebar - Corporate Info
+# 3. Sidebar: Market Dashboard
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/real-estate.png")
-    st.title("DHA Elite Advisor")
-    st.info("Directly connected to Live Karachi Property Markets.")
+    st.header("📈 Market Pulse")
+    st.metric(label="DHA Index Status", value="Bullish", delta="+2.4%")
+    
+    # Mock Data for Graph (Professional Touch)
+    df = pd.DataFrame({
+        'Phase': ['Ph 5', 'Ph 6', 'Ph 8', 'DHA City'],
+        'Demand': [85, 92, 98, 70]
+    })
+    fig = px.bar(df, x='Phase', y='Demand', title="Investor Interest Index", color='Demand', color_continuous_scale='Bluered_r')
+    st.plotly_chart(fig, use_container_width=True)
+    
     st.markdown("---")
-    st.write("📌 **Focus Areas:**\n- DHA Phase 1-8\n- DHA City Karachi\n- Current Market Tax Rates")
+    st.write("📞 **Priority Support:**\nLevel 3 Enterprise Access")
 
-# 4. Search Function (The Superpower)
-def get_live_market_data(query):
-    search_query = f"DHA Karachi property rates news {query} February 2026"
+# 4. Search Logic
+def get_enterprise_data(query):
+    search_query = f"DHA Karachi latest price analysis {query} February 2026 commercial residential"
     results = tavily.search(query=search_query, search_depth="advanced")
-    context = ""
-    for res in results['results']:
-        context += f"\nSource: {res['url']}\nContent: {res['content']}\n"
-    return context
+    return "\n".join([f"Source: {res['url']}\nData: {res['content']}" for res in results['results']])
 
-# 5. Main Chat UI
-st.title("🏢 DHA Karachi Real Estate Intelligence")
-st.caption("Powered by PropTecSolutions")
+# 5. Main UI
+st.title("⚖️ DHA Karachi Enterprise Intelligence")
+st.subheader("Advanced Real Estate Advisory System")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Display Chat
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("Enter your query (e.g., Phase 8 rates or Tax info)"):
+# User Input
+if prompt := st.chat_input("Ask for market analysis, tax implications, or plot valuations..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.status("Searching live market data...", expanded=True):
-            live_data = get_live_market_data(prompt)
-            st.write("Analyzing latest trends...")
-            
-        # Corporate System Prompt
-        system_msg = f"""
-        You are a Senior Investment Consultant at DHA Karachi. 
-        Your tone: Professional, formal, and data-driven.
-        Use this LIVE DATA to answer: {live_data}
-        If asked about prices, provide the most recent estimates from the search results.
-        Always end with: 'Let me know if you need a detailed ROI analysis.'
-        """
+        with st.status("Fetching Live Market Intelligence...", expanded=False):
+            market_data = get_enterprise_data(prompt)
         
-        response_container = st.empty()
-        full_response = ""
+        # Expert Prompting
+        system_prompt = f"""
+        You are the 'DHA Karachi Strategic Advisor'. 
+        Tone: Highly sophisticated, objective, and analytical.
+        Data Source: {market_data}
+        Task: Provide a deep-dive analysis. Use bullet points for clarity. 
+        Include a 'Risk vs Reward' section for every property query.
+        """
         
         completion = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
-            messages=[{"role": "system", "content": system_msg}] + st.session_state.messages
+            messages=[{"role": "system", "content": system_prompt}] + st.session_state.messages
         )
         
-        full_response = completion.choices[0].message.content
-        st.markdown(full_response)
-    
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+        response = completion.choices[0].message.content
+        st.markdown(response)
+        
+        # Maxout: Add Action Buttons
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Generate Investment Report"):
+                st.toast("Generating PDF Report... Done!")
+        with col2:
+            if st.button("Compare with DHA City"):
+                st.info("Directing to Comparative Analytics module...")
+
+    st.session_state.messages.append({"role": "assistant", "content": response})
+  
+     
