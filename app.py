@@ -1,49 +1,47 @@
 import streamlit as st
 from groq import Groq
 
-# 1. Page Configuration
-st.set_page_config(page_title="DHA Karachi AI Advisor", page_icon="🏝️")
+# 1. Page Config
+st.set_page_config(page_title="DHA Karachi AI", page_icon="🏝️")
 
-# 2. Secret API Key Setup (Professional Way)
-# Salman bhai, yahan ab key nahi likhni, sirf ye line copy karein:
-GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
-
-client = Groq(api_key=GROQ_API_KEY)
-
-# 3. System Prompt
-system_prompt = """
-You are the 'DHA Karachi Elite Advisor'. 
-Expertise: DHA Phases 1-8 and DHA City Karachi. 
-Provide professional advice on property, lease types, and taxes.
-"""
+# 2. API Key from Streamlit Secrets
+# Salman bhai, ensure "GROQ_API_KEY" is saved in Streamlit Settings!
+try:
+    client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+except Exception as e:
+    st.error("API Key nahi mili! Streamlit Settings -> Secrets check karein.")
+    st.stop()
 
 st.title("🏝️ DHA Karachi AI Advisor")
-st.markdown("---")
 
-# 4. Chat History
+# 3. Chat Session Initialization
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# 5. User Input & AI Response
+# 4. Main Logic
 if prompt := st.chat_input("DHA Karachi ke baare mein poochein..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        # Calling Groq with Llama 3.3
+        # AI Response Generation
         completion = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": "You are a DHA Karachi property expert."},
                 *st.session_state.messages
-            ],
+            ]
         )
+        # Yahan 'response' ko define kiya gaya hai sahi line par
         response = completion.choices[0].message.content
         st.markdown(response)
     
+    # Save response to history
     st.session_state.messages.append({"role": "assistant", "content": response})
+    
