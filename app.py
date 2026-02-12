@@ -7,15 +7,48 @@ import plotly.express as px
 # 1. Ultra-Premium Page Config
 st.set_page_config(page_title="DHA Karachi Pro-Intelligence", page_icon="⚖️", layout="wide")
 
-# Professional Styling
+# Custom CSS for Full Maxout White Font & Professional Look
 st.markdown("""
     <style>
-    .stApp { background-color: #0e1117; color: #ffffff; }
-    [data-testid="stSidebar"] { background-color: #1a1c24; border-right: 1px solid #3d4450; }
-    .stMetric { background-color: #1e2129; padding: 15px; border-radius: 10px; border: 1px solid #3d4450; }
+    /* Main Background and Global Font Color */
+    .stApp { 
+        background-color: #0e1117; 
+        color: #ffffff !important; 
+    }
+    
+    /* Ensuring all text, labels, and subheaders are White */
+    h1, h2, h3, p, span, label, .stMarkdown {
+        color: #ffffff !important;
+    }
+
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background-color: #161b22;
+        border-right: 1px solid #30363d;
+    }
+    [data-testid="stSidebar"] .css-17l2qt2 { 
+        color: #ffffff !important; 
+    }
+
+    /* Chat Message Bubbles */
+    .stChatMessage {
+        background-color: #1e2129;
+        border: 1px solid #3d4450;
+        border-radius: 10px;
+        color: #ffffff !important;
+    }
+
+    /* Input Box Styling */
+    .stChatInputContainer {
+        background-color: #161b22 !important;
+    }
+    
+    /* Metrics Box */
+    [data-testid="stMetricValue"] {
+        color: #00ffcc !important; /* Professional Teal color for numbers */
+    }
     </style>
     """, unsafe_allow_html=True)
-
 # 2. Secure API Initialization
 try:
     client = Groq(api_key=st.secrets["GROQ_API_KEY"])
