@@ -87,9 +87,11 @@ if query:
 # --- 7. THE LEGAL SHIELD (Copyright Notice) ---
 st.divider()
 st.markdown("""
-    <div style='text-align: center; color: #8b949e; font-size: 11px;'>
-        © 2026 PropTecSolutions by Salman Raja. All Rights Reserved. <br>
-        Proprietary AI Architecture. Unauthorized duplication is a violation of Pakistan Intellectual Property Laws.
+    <div style='text-align: center; color: #6e7681; font-size: 11px;'>
+        © 2026 PropTecSolutions | Salman Raja (Founder & CEO) <br>
+        <strong>Confidential & Proprietary.</strong> <br>
+        Unauthorized access or replication of this AI architecture is strictly prohibited. 
+        Access is subject to terms of service under PropTecSolutions.
     </div>
     """, unsafe_allow_html=True)
 
