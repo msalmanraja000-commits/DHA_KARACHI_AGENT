@@ -1,47 +1,66 @@
 import streamlit as st
-import random
-import time
 
-st.set_page_config(page_title="DHA Intel | PropTecSolutions", page_icon="🏛️", layout="wide")
+# 1. Page Configuration (Browser tab mein kya dikhega)
+st.set_page_config(
+    page_title="PropTec Intelligence | DHA Karachi", 
+    page_icon="🏛️", 
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 
-# UI Styling
-st.markdown("<style>.main {background-color: #0b0e14; color: white;}</style>", unsafe_allow_html=True)
-
-st.title("🏛️ DHA Karachi: Proprietary AI Dashboard")
-st.caption("Developed by PropTecSolutions | Restricted Access")
-
-# Sentiment & Metrics
-col1, col2 = st.columns(2)
-with col1:
-    st.metric("Market Sentiment Index", f"{random.randint(78, 91)}/100", delta="Verified")
-with col2:
-    st.metric("Growth Forecast", "Bullish", delta="High Potential")
-
-# Lead Capture
-with st.sidebar:
-    st.title("🔑 Founder's Access")
-    with st.form("leads"):
-        st.write("Investor Inquiry Form")
-        name = st.text_input("Name")
-        phone = st.text_input("Phone")
-        if st.form_submit_button("Submit to PropTecSolutions"):
-            st.success("Lead encrypted and sent to Founder.")
-
-# Analysis Query
-query = st.text_input("Analyze DHA Phase/Sector:")
-if query:
-    with st.spinner("Processing through PropTecSolutions Core..."):
-        time.sleep(1)
-        st.write(f"### Intelligence Brief: {query}")
-        st.info("Technical Trend: Accumulation Phase detected in current cycle.")
-
-# --- THE SECURITY SHIELD FOOTER ---
-st.divider()
+# 2. THE SECURITY SHIELD (Icons aur Menu chupanay ke liye)
 st.markdown("""
-    <div style='text-align: center; color: #c5a059; font-size: 11px; font-weight: bold;'>
-        PROPRIETARY ASSET OF PROPTECSOLUTIONS <br>
-        <span style='color: gray;'>© 2026 Salman Raja | Founder & CEO. <br>
-        CONFIDENTIAL PROTOTYPE: UNAUTHORIZED REPLICATION OR DISTRIBUTION IS STRICTLY PROHIBITED.</span>
+    <style>
+    /* GitHub icon, Pencil, aur Streamlit Menu ko jarr se khatam karne ke liye */
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    .stAppDeployButton {display:none !important;}
+    [data-testid="stHeader"] {display: none !important;}
+    
+    /* Custom Footer (Copyright System) */
+    .reportview-container .main footer {visibility: hidden;}    
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f0f2f6;
+        color: #31333F;
+        text-align: center;
+        padding: 10px;
+        font-family: sans-serif;
+        font-size: 12px;
+        border-top: 1px solid #e6e9ef;
+        z-index: 1000;
+    }
+    </style>
+    
+    <div class="footer">
+        <p>© 2026 PropTecSolutions. All Rights Reserved. | Proprietary AI Framework for DHA & BTK</p>
     </div>
     """, unsafe_allow_html=True)
 
+# 3. SIDEBAR BRANDING
+with st.sidebar:
+    st.image("https://your-logo-url.com/logo.png", width=200) # Agar logo hai toh link dalein
+    st.title("PropTecSolutions")
+    st.markdown("---")
+    st.info("AI-Driven Real Estate Analytics for Premium Sectors.")
+
+# 4. MAIN INTERFACE (Yahan aapka bot ka logic aayega)
+st.title("🏛️ DHA Karachi AI Advisor")
+st.subheader("Market Sentiment & ROI Projections")
+
+# Input field for users
+query = st.text_input("Enter Precinct or Phase (e.g., Phase 8, Precinct 10):")
+
+if query:
+    with st.spinner('Analyzing Market Trends...'):
+        # --- AAPKA PURANA LOGIC / DATA YAHAN AAYEGA ---
+        st.success(f"Strategy for {query}: Highly Recommended HOLD.")
+        st.write("Current Sentiment Index: 86/100")
+        
+# 5. COPYRIGHT & DISCLAIMER (Code ke andar bhi protection)
+st.markdown("---")
+st.caption("⚠️ Legal Notice: This AI Agent and its underlying logic are the sole property of PropTecSolutions. Unauthorized duplication or reverse engineering is strictly prohibited.")
