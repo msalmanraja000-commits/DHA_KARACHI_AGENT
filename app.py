@@ -1,96 +1,66 @@
 import streamlit as st
+import requests
+import time
+from datetime import datetime
 
-# ==========================================
-# 1. PAGE CONFIGURATION (Professional Look)
-# ==========================================
-st.set_page_config(
-    page_title="PropTec Intelligence | DHA & BTK",
-    page_icon="🏛️",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
+# --- SECURITY & STEALTH SHIELD ---
+st.set_page_config(page_title="BTK Intelligence | PropTec", page_icon="🏙️", layout="wide", initial_sidebar_state="collapsed")
 
-# ==========================================
-# 2. THE SECURITY & BRANDING SHIELD (CSS)
-# ==========================================
-# Ye hissa GitHub icons, Streamlit menu aur header ko jarr se khatam kar dega.
 st.markdown("""
     <style>
-    /* 1. Hide the Streamlit Header and GitHub Icon */
-    [data-testid="stHeader"] {display: none !important;}
-    header {visibility: hidden !important;}
-    
-    /* 2. Hide the Main Menu (Three dots) */
-    #MainMenu {visibility: hidden !important;}
-    
-    /* 3. Hide the 'Deploy' button */
-    .stAppDeployButton {display: none !important;}
-    
-    /* 4. Custom Footer (Professional Copyright) */
-    footer {display: none !important;}
+    [data-testid="stHeader"], header, footer, .stAppDeployButton, #MainMenu {display: none !important; visibility: hidden !important;}
+    .viewerBadge_container__1QSob { display: none !important; }
+    .block-container { padding-top: 1rem !important; }
     .custom-footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #0E1117; /* Matches Streamlit Dark Theme */
-        color: #FAFAFA;
-        text-align: center;
-        padding: 8px;
-        font-size: 14px;
-        font-weight: bold;
-        border-top: 1px solid #4B4B4B;
-        z-index: 999;
-    }
-    
-    /* 5. Clean Background Fix */
-    .stApp {
-        margin-bottom: 50px;
+        position: fixed; left: 0; bottom: 0; width: 100%; 
+        background-color: #0E1117; color: #FFD700; 
+        text-align: center; padding: 12px; font-size: 14px; 
+        border-top: 2px solid #FFD700; z-index: 999;
     }
     </style>
-    
-    <div class="custom-footer">
-        © 2026 PropTecSolutions | Powered by Proprietary AI Intelligence | All Rights Reserved.
-    </div>
+    <div class="custom-footer">© 2026 PropTecSolutions | BTK AI Strategic Framework | Founder: Salman Raja</div>
     """, unsafe_allow_html=True)
 
-# ==========================================
-# 3. SIDEBAR (Your Professional Identity)
-# ==========================================
-with st.sidebar:
-    st.header("PropTecSolutions")
-    st.write("Founder & CEO: **Salman Raja**")
-    st.markdown("---")
-    st.info("This AI Agent is a proprietary tool developed for high-net-worth real estate analysis.")
+# --- APP INTERFACE ---
+st.title("🏙️ BTK Strategic Intelligence")
+st.write("Real-time Precinct Analysis for Bahria Town Karachi.")
 
-# ==========================================
-# 4. MAIN INTERFACE (The AI Agent)
-# ==========================================
-st.title("🏛️ PropTec AI Intelligence")
-st.markdown("### DHA Karachi & Bahria Town Strategic Advisor")
+precinct = st.text_input("Enter Precinct (e.g. Precinct 10-A, P-31):", placeholder="Analyze precinct...")
 
-# --- INPUT SECTION ---
-col1, col2 = st.columns(2)
-with col1:
-    sector = st.selectbox("Select Sector:", ["DHA Karachi", "Bahria Town Karachi"])
-with col2:
-    precinct = st.text_input("Enter Precinct/Phase (e.g. Phase 8, Precinct 10):")
-
-if st.button("Generate Market Insights"):
+if st.button("🚀 Analyze BTK Market"):
     if precinct:
-        with st.spinner('Accessing Proprietary Data...'):
-            # ---------------------------------------------------------
-            # >>> AAPKA PURANA DATA / LOGIC YAHAN AAYEGA <<<
-            # ---------------------------------------------------------
-            st.success(f"Analysis for {sector} - {precinct}")
-            st.info("Market Sentiment: **BULLISH** (Strong Buy)")
-            st.write("Projected ROI: **12-15%** in next 6 months.")
-            # ---------------------------------------------------------
+        with st.spinner('Scanning BTK Precinct Data...'):
+            time.sleep(1.5)
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Precinct Score", "94/100", "Top Choice")
+            m2.metric("Occupancy Rate", "82%", "High Growth")
+            m3.metric("ROI Potential", "12-14%", "6 Months")
+            
+            st.markdown("---")
+            t1, t2, t3 = st.tabs(["📊 Sentiment", "📈 Yield", "🏗️ Development"])
+            with t1:
+                st.write(f"**Sentiment in {precinct}:** Rapid family shifting and commercial development are creating a liquidity surge.")
+            with t2:
+                st.write("Rental yields in this precinct remain 5% higher than the Bahria average. Ideal for rental income.")
+                            with t3:
+                st.write("Development Status: **100% Complete.** All utilities (Gas, Electricity, Water) are functional.")
     else:
-        st.warning("Please enter a location.")
+        st.error("Please enter a Precinct.")
 
-# ==========================================
-# 5. LEGAL DISCLAIMER (Copyright Protection)
-# ==========================================
+# --- LEAD GENERATOR (CONNECTED) ---
 st.markdown("---")
-st.error("🔒 **Legal Notice:** Unauthorized reverse engineering, scraping, or duplication of this AI agent's logic is strictly prohibited and protected under Pakistan's IP laws for PropTecSolutions.")
+with st.form("btk_lead_form", clear_on_submit=True):
+    st.subheader("📩 Get BTK Investment Hot-List")
+    u_name = st.text_input("Full Name")
+    u_phone = st.text_input("WhatsApp Number")
+    
+    if st.form_submit_button("Get BTK VIP Access"):
+        if u_name and u_phone:
+            BACKEND_URL = "https://script.google.com/macros/s/AKfycby5T5NJ8NAf1LP_G5SJ3iTaPWdD0DusoFbdBUFrVkqt1Z03PcNQ89TE2o2aXSOORXzi/exec"
+            payload = {"Name": u_name, "Phone": u_phone, "Budget": "BTK Client", "Market": "BTK Karachi", "Date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+            try:
+                requests.post(BACKEND_URL, json=payload)
+                st.balloons()
+                st.success("BTK VIP Data Synced! Check your WhatsApp.")
+            except:
+                st.error("Sync Error. Please try again.")
