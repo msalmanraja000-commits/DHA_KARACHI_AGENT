@@ -1,66 +1,96 @@
 import streamlit as st
 
-# 1. Page Configuration (Browser tab mein kya dikhega)
+# ==========================================
+# 1. PAGE CONFIGURATION (Professional Look)
+# ==========================================
 st.set_page_config(
-    page_title="PropTec Intelligence | DHA Karachi", 
-    page_icon="🏛️", 
+    page_title="PropTec Intelligence | DHA & BTK",
+    page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# 2. THE SECURITY SHIELD (Icons aur Menu chupanay ke liye)
+# ==========================================
+# 2. THE SECURITY & BRANDING SHIELD (CSS)
+# ==========================================
+# Ye hissa GitHub icons, Streamlit menu aur header ko jarr se khatam kar dega.
 st.markdown("""
     <style>
-    /* GitHub icon, Pencil, aur Streamlit Menu ko jarr se khatam karne ke liye */
-    #MainMenu {visibility: hidden !important;}
-    header {visibility: hidden !important;}
-    footer {visibility: hidden !important;}
-    .stAppDeployButton {display:none !important;}
+    /* 1. Hide the Streamlit Header and GitHub Icon */
     [data-testid="stHeader"] {display: none !important;}
+    header {visibility: hidden !important;}
     
-    /* Custom Footer (Copyright System) */
-    .reportview-container .main footer {visibility: hidden;}    
-    .footer {
+    /* 2. Hide the Main Menu (Three dots) */
+    #MainMenu {visibility: hidden !important;}
+    
+    /* 3. Hide the 'Deploy' button */
+    .stAppDeployButton {display: none !important;}
+    
+    /* 4. Custom Footer (Professional Copyright) */
+    footer {display: none !important;}
+    .custom-footer {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: #f0f2f6;
-        color: #31333F;
+        background-color: #0E1117; /* Matches Streamlit Dark Theme */
+        color: #FAFAFA;
         text-align: center;
-        padding: 10px;
-        font-family: sans-serif;
-        font-size: 12px;
-        border-top: 1px solid #e6e9ef;
-        z-index: 1000;
+        padding: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        border-top: 1px solid #4B4B4B;
+        z-index: 999;
+    }
+    
+    /* 5. Clean Background Fix */
+    .stApp {
+        margin-bottom: 50px;
     }
     </style>
     
-    <div class="footer">
-        <p>© 2026 PropTecSolutions. All Rights Reserved. | Proprietary AI Framework for DHA & BTK</p>
+    <div class="custom-footer">
+        © 2026 PropTecSolutions | Powered by Proprietary AI Intelligence | All Rights Reserved.
     </div>
     """, unsafe_allow_html=True)
 
-# 3. SIDEBAR BRANDING
+# ==========================================
+# 3. SIDEBAR (Your Professional Identity)
+# ==========================================
 with st.sidebar:
-    st.image("https://your-logo-url.com/logo.png", width=200) # Agar logo hai toh link dalein
-    st.title("PropTecSolutions")
+    st.header("PropTecSolutions")
+    st.write("Founder & CEO: **Salman Raja**")
     st.markdown("---")
-    st.info("AI-Driven Real Estate Analytics for Premium Sectors.")
+    st.info("This AI Agent is a proprietary tool developed for high-net-worth real estate analysis.")
 
-# 4. MAIN INTERFACE (Yahan aapka bot ka logic aayega)
-st.title("🏛️ DHA Karachi AI Advisor")
-st.subheader("Market Sentiment & ROI Projections")
+# ==========================================
+# 4. MAIN INTERFACE (The AI Agent)
+# ==========================================
+st.title("🏛️ PropTec AI Intelligence")
+st.markdown("### DHA Karachi & Bahria Town Strategic Advisor")
 
-# Input field for users
-query = st.text_input("Enter Precinct or Phase (e.g., Phase 8, Precinct 10):")
+# --- INPUT SECTION ---
+col1, col2 = st.columns(2)
+with col1:
+    sector = st.selectbox("Select Sector:", ["DHA Karachi", "Bahria Town Karachi"])
+with col2:
+    precinct = st.text_input("Enter Precinct/Phase (e.g. Phase 8, Precinct 10):")
 
-if query:
-    with st.spinner('Analyzing Market Trends...'):
-        # --- AAPKA PURANA LOGIC / DATA YAHAN AAYEGA ---
-        st.success(f"Strategy for {query}: Highly Recommended HOLD.")
-        st.write("Current Sentiment Index: 86/100")
-        
-# 5. COPYRIGHT & DISCLAIMER (Code ke andar bhi protection)
+if st.button("Generate Market Insights"):
+    if precinct:
+        with st.spinner('Accessing Proprietary Data...'):
+            # ---------------------------------------------------------
+            # >>> AAPKA PURANA DATA / LOGIC YAHAN AAYEGA <<<
+            # ---------------------------------------------------------
+            st.success(f"Analysis for {sector} - {precinct}")
+            st.info("Market Sentiment: **BULLISH** (Strong Buy)")
+            st.write("Projected ROI: **12-15%** in next 6 months.")
+            # ---------------------------------------------------------
+    else:
+        st.warning("Please enter a location.")
+
+# ==========================================
+# 5. LEGAL DISCLAIMER (Copyright Protection)
+# ==========================================
 st.markdown("---")
-st.caption("⚠️ Legal Notice: This AI Agent and its underlying logic are the sole property of PropTecSolutions. Unauthorized duplication or reverse engineering is strictly prohibited.")
+st.error("🔒 **Legal Notice:** Unauthorized reverse engineering, scraping, or duplication of this AI agent's logic is strictly prohibited and protected under Pakistan's IP laws for PropTecSolutions.")
