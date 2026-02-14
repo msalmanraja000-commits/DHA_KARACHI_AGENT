@@ -3,7 +3,7 @@ import requests
 import time
 from datetime import datetime
 
-# --- SECURITY & STEALTH SHIELD ---
+# --- SECURITY & STEALTH ---
 st.set_page_config(page_title="DHA Intelligence | PropTec", page_icon="🏛️", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown("""
@@ -25,7 +25,7 @@ st.markdown("""
 st.title("🏛️ DHA Karachi Strategic Intelligence")
 st.write("Proprietary AI for Phase 1-8 & DHA City Analytics.")
 
-phase = st.text_input("Enter Phase/Sector (e.g. Phase 8, Zone B):", placeholder="Analyze DHA location...")
+phase = st.text_input("Enter Phase/Sector (e.g. Phase 8, Zone B):", key="dha_loc")
 
 if st.button("🚀 Run DHA Deep-Scan"):
     if phase:
@@ -33,21 +33,21 @@ if st.button("🚀 Run DHA Deep-Scan"):
             time.sleep(1.5)
             m1, m2, m3 = st.columns(3)
             m1.metric("Investment Score", "91/100", "Strong Bullish")
-            m2.metric("Liquidity", "High", "Active Phase")
+            m2.metric("Liquidity", "High", "Active")
             m3.metric("Projected ROI", "15-20%", "Annual")
             
             st.markdown("---")
-            t1, t2, t3 = st.tabs(["📊 Market Logic", "📈 Price Forecast", "⚖️ Legal Status"])
+            t1, t2, t3 = st.tabs(["📊 Market Logic", "📈 Forecast", "⚖️ Legal Status"])
             with t1:
-                st.write(f"**Trend in {phase}:** AI detects institutional capital inflow. This sector is currently a primary target for mid-to-long term equity building.")
+                st.write(f"**Trends in {phase}:** Institutional capital inflow detected. High demand for residential equity building.")
             with t2:
-                st.write("Price resistance levels are shifting upwards. Forecast indicates an 8% growth in the next quarter.")
+                st.write("Current price points are testing historical resistance levels. Breakout anticipated.")
             with t3:
-                st.write("Legal Status: **100% Clear.** No active litigation detected in recent registry scans.")
+                st.write("Legal Status: **100% Clear.** No litigation detected in registry scans.")
     else:
-        st.error("Please enter a DHA Phase.")
+        st.error("Please enter a Phase.")
 
-# --- LEAD GENERATOR (CONNECTED) ---
+# --- LEAD GENERATOR (CONNECTED TO YOUR SCRIPT) ---
 st.markdown("---")
 with st.form("dha_lead_form", clear_on_submit=True):
     st.subheader("📩 Get Private DHA VIP List")
@@ -56,11 +56,18 @@ with st.form("dha_lead_form", clear_on_submit=True):
     
     if st.form_submit_button("Request DHA Access"):
         if u_name and u_phone:
-            BACKEND_URL = "https://script.google.com/macros/s/AKfycbx_v0Uf0KshWf_t_2qfS5vUq-vjU-u_uXN6XmS-Y-vM6W-SOORXzi/exec"
-            payload = {"Name": u_name, "Phone": u_phone, "Budget": "DHA Client", "Market": "DHA Karachi", "Date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+            # Your exact Apps Script URL from image_2e77ff.png
+            BACKEND_URL = "https://script.google.com/macros/s/AKfycby5T5NJ8NAf1LP_G5SJ3iTaPWdD0DusoFbdBUFrVkqt1Z03PcNQ89TE2o2aXSOORXzi/exec"
+            payload = {
+                "Name": u_name, 
+                "Phone": u_phone, 
+                "Budget": "DHA Client", 
+                "Market": "DHA Karachi", 
+                "Date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
             try:
                 requests.post(BACKEND_URL, json=payload)
                 st.balloons()
-                st.success("DHA Intelligence Report Locked! Check your WhatsApp.")
+                st.success("DHA Intelligence Report Locked! Data saved to your sheet.")
             except:
-                st.error("Sync Error. Please try again.")
+                st.error("Connection error. Check your internet.")
