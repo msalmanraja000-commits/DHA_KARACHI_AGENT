@@ -7,18 +7,26 @@ from datetime import datetime
 st.set_page_config(page_title="DHA Intelligence | PropTec", page_icon="🏛️", layout="wide")
 st.markdown("""
     <style>
-    [data-testid="stHeader"], header, footer, .stAppDeployButton, #MainMenu {display: none !important; visibility: hidden !important;}
-    .viewerBadge_container__1QSob { display: none !important; }
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stAppDeployButton {display:none;}
+    [data-testid="stHeader"] {display:none;}
+    .viewerBadge_container__1QSob {display:none;}
+    .stAppToolbar {display:none;}
+    
+    /* Mobile optimization */
+    .block-container { padding-top: 0rem !important; }
+    
     .custom-footer {
         position: fixed; left: 0; bottom: 0; width: 100%; 
-        background-color: #0E1117; color: #0088FF; 
-        text-align: center; padding: 10px; font-size: 13px; 
-        border-top: 2px solid #0088FF; z-index: 999;
+        background-color: #0E1117; color: #00FFAA; 
+        text-align: center; padding: 10px; font-size: 12px; 
+        border-top: 1px solid #00FFAA; z-index: 999;
     }
     </style>
-    <div class="custom-footer">© 2026 PropTecSolutions | DHA Karachi Specialized AI | Founder: Salman Raja</div>
+    <div class="custom-footer">© 2026 PropTecSolutions | Powered by Salman Raja AI</div>
     """, unsafe_allow_html=True)
-
 # --- 📊 INTERFACE ---
 st.title("🏛️ DHA Karachi Strategic Intelligence")
 phase = st.text_input("Enter Phase/Sector:", placeholder="e.g. Phase 8, Zone B")
