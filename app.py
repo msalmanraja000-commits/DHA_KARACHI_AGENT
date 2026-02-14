@@ -42,7 +42,7 @@ with st.form("dha_lead_form", clear_on_submit=True):
     if st.form_submit_button("Request DHA VIP Access"):
         if u_name and u_phone and u_budget != "Select Budget":
             # Apka Web App URL
-            URL = "https://script.google.com/macros/s/AKfycby5T5NJ8NAf1LP_G5SJ3iTaPWdD0DusoFbdBUFrVkqt1Z03PcNQ89TE2o2aXSOORXzi/exec"
+            URL = "https://script.google.com/macros/s/AKfycby1ZemyjAZGkOsJSQ0n_N5CzJ565xVzs_ze8xEgXIlu9yzhEGRb8seO8-HYjxeoZOCF/exec"
             payload = {"Name": u_name, "Phone": u_phone, "Budget": u_budget, "Market": "DHA Karachi", "Date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
             try:
                 # Sending data to sheet
